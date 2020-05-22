@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "102379634698",
+    "firebase_url": "https://liyo-b2865.firebaseio.com",
+    "project_id": "liyo-b2865",
+    "storage_bucket": "liyo-b2865.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102379634698:android:e8e5e06b60eb98fa279ff3",
+        "android_client_info": {
+          "package_name": "com.example.liyo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102379634698-dp1rnk8s2qe27ebv7g3tepr207am0gj4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.liyo",
+            "certificate_hash": "b30311569a2f7b3fa62661781833e0a40c129481"
+          }
+        },
+        {
+          "client_id": "102379634698-epinra0l789vuhmodssi6i3q0tmfpic9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApFc9WI62-tGRdSlTMzN0lk4K4p6jxU-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102379634698-epinra0l789vuhmodssi6i3q0tmfpic9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
