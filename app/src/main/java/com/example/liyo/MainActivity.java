@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         String UserPhoneKey = Paper.book().read( Prevalent.UserPhoneKey );
         String UserPasswordKey = Paper.book().read( Prevalent.UserPasswordKey);
 
-        if(UserPhoneKey!= "" && UserPasswordKey != "")
+        if(UserPhoneKey != "Null" && UserPasswordKey != "Null")
         {
           if(!TextUtils.isEmpty( UserPhoneKey ) && ! TextUtils.isEmpty( UserPasswordKey ) )
           {
@@ -76,11 +76,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                String phone;
+
                 if(dataSnapshot.child( "Users").child(Phone).exists())
                 {
                     Users usersData = dataSnapshot.child( "Users" ).child( Phone ).getValue( Users.class);
-                    if(usersData.getPhone().equals( Phone ))
+
+
+                    if(!usersData.getPhone().equals( Phone ))
                     {
                         if(usersData.getPassword().equals( Password ))
                         {

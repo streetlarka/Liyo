@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.esotericsoftware.kryo.NotNull;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,15 +26,15 @@ import com.google.firebase.database.ValueEventListener;
 import com.rey.material.widget.CheckBox;
 
 public class LoginActivity extends AppCompatActivity {
-       private EditText InputPhoneNumber,InputPassword;
-       private Button LoginButton;
-       private ProgressDialog loadingBar;
-       private TextView AdminLink, NotAdminLink;
+    private EditText InputPhoneNumber,InputPassword;
+    private Button LoginButton;
+    private ProgressDialog loadingBar;
+    private TextView AdminLink, NotAdminLink;
 
 
 
-       private String parentDpName = "Users";
-       private CheckBox chkBoxRememberMe;
+    private String parentDpName = "Users";
+    private CheckBox chkBoxRememberMe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -53,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-               LoginUser();
+                LoginUser();
             }
         } );
 
@@ -61,10 +62,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-               LoginButton.setText("Login Admin");
-               AdminLink.setVisibility( View.INVISIBLE );
-               NotAdminLink.setVisibility( View.VISIBLE );
-               parentDpName = "Admins";
+                LoginButton.setText("Login Admin");
+                AdminLink.setVisibility( View.INVISIBLE );
+                NotAdminLink.setVisibility( View.VISIBLE );
+                parentDpName = "Admins";
             }
         } );
 
@@ -85,14 +86,14 @@ public class LoginActivity extends AppCompatActivity {
         String password = InputPassword.getText().toString();
 
         if(TextUtils.isEmpty( phone ))
-       {
-          Toast.makeText(this,"Please write your phone...", Toast.LENGTH_SHORT ).show();
-       }
-       else if(TextUtils.isEmpty( password ))
-       {
-          Toast.makeText(this,"Please write your password...", Toast.LENGTH_SHORT ).show();
-       }
-       else
+        {
+            Toast.makeText(this,"Please write your phone...", Toast.LENGTH_SHORT ).show();
+        }
+        else if(TextUtils.isEmpty( password ))
+        {
+            Toast.makeText(this,"Please write your password...", Toast.LENGTH_SHORT ).show();
+        }
+        else
         {
             loadingBar.setTitle( "Login Account" );
             loadingBar.setMessage( "Please wait,while we are checking the credentails" );
@@ -100,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
             loadingBar.show();
 
             AllowAccessToAccount(phone,password);
+
         }
     }
 
@@ -118,46 +120,45 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-              if(dataSnapshot.child( parentDpName ).child( phone ).exists())
-              {
-                 Users usersData = dataSnapshot.child( parentDpName ).child( phone ).getValue( Users.class);
-                 if(usersData.getPhone().equals( phone ))
-                 {
-                     if(usersData.getPassword().equals( password ))
-                     {
-                       if(parentDpName.equals( "Admins" ))
-                       {
-                           Toast.makeText( LoginActivity.this,"Welcome Admin you are Logged in Succesfully..",Toast.LENGTH_SHORT ).show();
-                           loadingBar.dismiss();
+                if(dataSnapshot.child( parentDpName ).child( phone ).exists())
+                {
+
+                    Users usersData = dataSnapshot.child( parentDpName ).child( phone ).getValue( Users.class );
+
+                    if (usersData.getPhone().equals( phone ))
+                    {
+
+                        if (usersData.getPassword().equals( password ))
+                        {
+                            if (parentDpName.equals( "Admins" ))
+                            {
+                                Toast.makeText( LoginActivity.this, "Welcome Admin you are Logged in Succesfully..", Toast.LENGTH_SHORT ).show();
+                                loadingBar.dismiss();
 
 
-                           Intent intent=new Intent( LoginActivity.this,AdminCatagoryActivity.class );
-                           startActivity( intent );
-                       }
-                       else if(parentDpName.equals( "Users" ))
-                       {
-                           Toast.makeText( LoginActivity.this,"logged sucessfully",Toast.LENGTH_SHORT ).show();
-                           loadingBar.dismiss();
+                                Intent intent = new Intent( LoginActivity.this, AdminCatagoryActivity.class );
+                                startActivity( intent );
+                            } else if (parentDpName.equals( "Users" ))
+                            {
+                                Toast.makeText( LoginActivity.this, "logged sucessfully", Toast.LENGTH_SHORT ).show();
+                                loadingBar.dismiss();
 
 
-                           Intent intent=new Intent( LoginActivity.this,HomeActivity.class );
-                           startActivity( intent );
-                       }
-                     }
-                     else
-                     {
-                         loadingBar.dismiss();
-                         Toast.makeText( LoginActivity.this,"Password is incorrect.", Toast.LENGTH_SHORT ).show();
-                     }
-                 }
-              }
-              else
-              {
-                  Toast.makeText( LoginActivity.this,"Account with this"+ phone + "number do not exists.",Toast.LENGTH_SHORT ).show();
-                  loadingBar.dismiss();
+                                Intent intent = new Intent( LoginActivity.this, HomeActivity.class );
+                                startActivity( intent );
+                            }
+                        } else
+                            {
+                            loadingBar.dismiss();
+                            Toast.makeText( LoginActivity.this, "Password is incorrect.", Toast.LENGTH_SHORT ).show();
+                        }
+                    } else
+                        {
+                        Toast.makeText( LoginActivity.this, "Account with this" + phone + "number do not exists.", Toast.LENGTH_SHORT ).show();
+                        loadingBar.dismiss();
 
-              }
-
+                    }
+                }
             }
 
 
